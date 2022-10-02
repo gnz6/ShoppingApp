@@ -11,11 +11,11 @@ const getUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        const {nickname, email, password, type, projects, favourites, status} = req.body;
+        const {nickname, email, password, type, projects, favourites, status, avatar} = req.body;
         if (!nickname || !email || !password) {
             return res.status(400).send("Missing required parameters")
         }
-        const newUser = {nickname, email, password, type, projects, favourites, status }
+        const newUser = {nickname, email, password, type, projects, favourites, status, avatar }
         await usersModel.create(newUser)
         res.send(newUser)
     } catch (error) {
@@ -26,9 +26,9 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
-        const {nickname, email, password, type, projects, favourites, status } = req.body;
+        const {nickname, email, password, type, projects, favourites, status, avatar } = req.body;
 
-        const editedUser = { nickname, email, password, type, projects , favourites, status }
+        const editedUser = { nickname, email, password, type, projects , favourites, status, avatar }
 
         await usersModel.findOneAndUpdate(id, editedUser)
         res.send(editedUser)
