@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const {bcrypt, genSalt, hash, compare} = require("bcryptjs")
+const {bcrypt, genSalt, hash, compare} = require("bcrypt")
 const mongooseDelete = require("mongoose-delete")
 
 const UserSchema = new mongoose.Schema({

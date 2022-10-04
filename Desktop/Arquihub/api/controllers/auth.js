@@ -32,11 +32,13 @@ const signUp = async (req, res) => {
             console.log(newUser)
             const addUser = await usersModel.create(newUser)
             const token = sign({ id: addUser._id }, `${SECRET}`, { expiresIn: 86400 })
-
-            res.status(200).send({ token })
+            const userImg = newUser.avatar
+            const userId = newUser._id
+            const userRole = newUser.type
+            res.send({token, userImg, userId, userRole })
 
         }else{
-            return res.status(400).send("User already registered")
+            return res.status(400).send("User already registered, log in wth email")
         }
     } catch (error) {
         console.log(error)
@@ -61,7 +63,9 @@ const logIn = async (req, res) => {
        const token = sign({ id: findUser._id }, `${SECRET}`, { expiresIn: 86400 })
         const userImg = findUser.avatar
         const username = findUser.nickname
-       res.send({token, userImg, username })
+        const userId = findUser._id
+        const userRole = findUser.type
+       res.send({token, userImg, username, userId, userRole })
 
     } catch (error) {
         console.log(error)
