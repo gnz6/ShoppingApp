@@ -7,16 +7,16 @@ import CharacterDetail from './CharacterDetail'
 function Characters() {
 
     const dispatch = useDispatch()
-    const allCharacters = useSelector(state=> state.character.allChars)
-    console.log(allCharacters);
     const [currentPage, setCurrentPage] = useState(0)
     const [search, setSearch] = useState("")    
     
-
     useEffect(()=>{
         dispatch(getAllCharacters())
         
     },[dispatch])
+    
+    const allCharacters = useSelector(state=> state.character.allChars)
+    console.log(allCharacters);
 
     const charsInPage =()=>{
         if(search.length === 0) return allCharacters.slice(currentPage ,currentPage + 8)

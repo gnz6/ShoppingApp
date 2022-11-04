@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Planets from "./components/Planets";
 import Films from "./components/Films";
 import Characters from "./components/Characters";
+import CharacterDetail from "./components/CharacterDetail";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
       <Route path="/planets" element={<Planets/>}/>
       <Route path="/films" element={<Films/>}/>
       <Route path="/characters" element={<Characters/>}/>
+      <Route path="/character/:id" element={<CharacterDetail/>}/>
     </Routes>
     </div>
     </BrowserRouter>
