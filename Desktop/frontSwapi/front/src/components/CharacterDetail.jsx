@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getCharacter } from '../redux/slices/characters/characterActions'
-import { getFilm } from '../redux/slices/films/filmActions'
+import { getCharacterFilms, getFilm } from '../redux/slices/films/filmActions'
 import { getPlanet } from '../redux/slices/planets/planetActions'
 import { getSpecie } from '../redux/slices/species/speciesActions'
 const CharacterDetail = () => {
@@ -15,22 +15,22 @@ const CharacterDetail = () => {
     let charFilms = useSelector((state)=>state.films.film)
     const planetId = character.homeworld
     const specieId = character.specie
-    const filmId = character.films
-        //  console.log(charFilms);
+    const filmsId = character.films
+        //   console.log(filmId);
+      console.log(charFilms);
 
     useEffect(()=>{
-        dispatch(getCharacter(id))
-        dispatch(getPlanet(planetId))
-        dispatch(getSpecie(specieId))
-        if(filmId.length === 1){
-            dispatch(getFilm(filmId[0]))
-        }else if(filmId.length > 1){
-            filmId.forEach(film=>{
-            dispatch(getFilm(film))
-
-            })
+        if(filmsId){
+            dispatch(getCharacterFilms(id, filmsId))
+            dispatch(getPlanet(planetId))
+            dispatch(getSpecie(specieId))
+        }else{
+            dispatch(getCharacter(id))
+            dispatch(getPlanet(planetId))
+            dispatch(getSpecie(specieId))
         }
-    },[dispatch, id, planetId,specieId, filmId ])
+    // },[dispatch, id, planetId,specieId, filmId ])
+},[dispatch, planetId, specieId])
 
 
   return (
@@ -48,7 +48,7 @@ const CharacterDetail = () => {
         :
         <h3>Films : {charFilms? charFilms.map(film=>film.title + ", ") : ""}</h3>
         } */}
-        <h3> Specie: {charSpecie.name? charSpecie.name: "No species registered"}</h3>
+        <h3> Specie: {charSpecie.name? charSpecie.name: "Human"}</h3>
 
     </div>    
     }
