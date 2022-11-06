@@ -55,6 +55,8 @@ const getPlanetById = async (req, res) => {
             let planetFilms = modifiedPlanet.films
             let films = await filmModel.find({ url: { $in: planetFilms } })
             let formatFilms = films[0]?films.map(f => `Episode ${f.episode_id} : ${f.title}`):"This planet does not appeat in any film"
+            let set = new Set(formatFilms)
+            let formFilms = Array.from(set) 
 
             let planetResidents = modifiedPlanet.residents
             let residents = await peopleModel.find({ url: { $in: planetResidents } })
@@ -67,7 +69,7 @@ const getPlanetById = async (req, res) => {
                 climate: findPlanet.climate,
                 terrain: findPlanet.terrain,
                 surface_water: findPlanet.surface,
-                films : formatFilms,
+                films : formFilms,
                 residents: formatResidents
             }
  
