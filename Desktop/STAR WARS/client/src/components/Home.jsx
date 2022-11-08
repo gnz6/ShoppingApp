@@ -8,15 +8,17 @@ import Characters from './Characters/Characters'
 import Films from './Films/Films'
 import Planets from './Planets/Planets'
 import Species from "./species/Species"
+import useLocalStorage from '../hooks/useLocalStorage'
 
 const Home = () => {
+    
 
     const dispatch = useDispatch()
     const allCharacters = useSelector(state => state.character.allChars)
     const allPlanets = useSelector(state => state.planet.allPlanets)
     const allFilms = useSelector(state => state.films.allFilms)
     const allSpecies = useSelector(state => state.species.allSpecies)
-    const [tab, setTab] = useState("characters")
+    const [tab, setTab] = useLocalStorage("tab", "")
 
     useEffect(() => {
         dispatch(getAllCharacters())
@@ -27,25 +29,25 @@ const Home = () => {
 
 
     return (
-        <div class="text-white">
-            <nav >
-                <ul class="flex items-center justify-center p-8 " >
-                    <li>
+        <div >
+            <nav class="bg-gradient-to-b from-gray-400 via-gray-600 to-gray-800 text-gray-300 h-12 items-center">
+                <ul class="flex items-start pt-1 justify-evenly h-10   visited:text-yellow-300" >
+                    <li class="border h-10 font-lg w-1/6 items-center justify-center text-center bg-black bg-opacity-50 hover:text-yellow-400 font-bold rounded-lg">
                         <button onClick={(e) => setTab(e.target.value)} name="tab" value={"characters"}>
                             Characters
                         </button>
                     </li>
-                    <li >
+                    <li class="border h-10 font-lg w-1/6 items-center justify-center text-center bg-black bg-opacity-50 hover:text-yellow-400 font-bold rounded-lg">
                         <button onClick={(e) => setTab(e.target.value)} name="tab" value={"films"}>
                             Films
                         </button>
                     </li>
-                    <li >
+                    <li class="border h-10 font-lg w-1/6 items-center justify-center text-center bg-black bg-opacity-50 hover:text-yellow-400 font-bold rounded-lg">
                         <button onClick={(e) => setTab(e.target.value)} name="tab" value={"planets"}>
                             Planets
                         </button>
                     </li>
-                    <li >
+                    <li class="border h-10 font-lg w-1/6 items-center justify-center text-center bg-black bg-opacity-50 hover:text-yellow-400 font-bold rounded-lg">
                         <button onClick={(e) => setTab(e.target.value)} name="tab" value={"species"}>
                             Species
                         </button>
@@ -73,7 +75,7 @@ const Home = () => {
                                     <Species />
                                 </div>
                                 : <div>
-                                    <h1>404</h1>
+                                    <h1>Select a Category to display results</h1>
                                 </div>
             }
 

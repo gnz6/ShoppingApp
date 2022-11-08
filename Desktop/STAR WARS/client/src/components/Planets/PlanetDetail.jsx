@@ -39,14 +39,16 @@ const PlanetDetail = () => {
 
       <div>
         Films:
-        {Array.isArray(planet.films) ?
+        { planet.films ?
+        
           planet.films?.map(c =>
 
           (<ul>
             <li>◽{c}</li>
           </ul>
           )) :
-          <div>
+         
+         <div>
             <p>No Films for {planet.name}</p>
           </div>
         }
