@@ -15,9 +15,10 @@ const signUp = async (req, res)=>{
             password: await usersModel.encryptPassword(password)
         }
 
-        const addUser = await usersModel.create(newUser)
-        const token = sign({ id: addUser._id}, `${SECRET}`, {expiresIn:86400})
-        return res.send({addUser,token})
+        await usersModel.create(newUser)
+        const token = sign({ id: newUser._id}, `${SECRET}`, {expiresIn:86400})
+        // return res.send({token})
+        return res.send(`${newUser.email} registered.`)
     } catch (error) {
         console.log(error)        
       return res.send( error)        
@@ -52,12 +53,16 @@ const googleLogin = async(req, res)=>{
             const newUser = {
                 name, email
             }
-            const addUser = await usersModel.create(newUser)
-            const token = sign({ id: addUser._id}, `${SECRET}`, {expiresIn:86400})
-            return res.status(200).send({token, addUser})
+            await usersModel.create(newUser)
+            const token = sign({ id: newUser._id}, `${SECRET}`, {expiresIn:86400})
+            // return res.status(200).send({token, addUser})
+            return res.send(`${newUser.email} registered.`)
+
         }else{
-            const token = sign({ id: addUser._id}, `${SECRET}`, {expiresIn:86400})
-            return res.status(200).send({token, findUser})
+            const token = sign({ id: findUser._id}, `${SECRET}`, {expiresIn:86400})
+            console.log(findUser);
+             return res.status(200).send({token, findUser})
+            
         }
 
     } catch (error) {
@@ -119,4 +124,17 @@ const getUsers =async(req,res)=>{
     return res.status(400).send("Cant find users")
 }
 
-module.exports = {signUp, logIn, googleLogin, getUsers}
+const getUser = async(req, res)=>{
+    const {id}= req.params
+    try {
+        const user = await usersModel.findById(id)
+            console.log(user);
+            return res.status(200).send(user)
+        
+    } catch (error) {
+        console.log(error.message);
+        res.send(error.message)
+    }
+}
+
+module.exports = {signUp, logIn, googleLogin, getUsers, getUser}

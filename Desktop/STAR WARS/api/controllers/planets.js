@@ -27,7 +27,7 @@ const getPlanets = async (req, res) => {
                     climate: planet.climate,
                     terrain: planet.terrain,
                     surface_water: planet.surface_water,
-                    films: planet.films[0] ? planet.films.map(planet => planet) : "",
+                    films: planet.films[0] ? planet.films.map(planet => planet) : null,
                     residents: planet.residents[0] ? planet.residents.map(planet => planet) : "",
                     url: planet.url ? planet.url : ""
                 }
@@ -51,12 +51,16 @@ const getPlanetById = async (req, res) => {
 
             const findPlanet = await planetModel.findById(id)
             let modifiedPlanet = findPlanet
-
+            let formFilms;
             let planetFilms = modifiedPlanet.films
-            let films = await filmModel.find({ url: { $in: planetFilms } })
-            let formatFilms = films[0]?films.map(f => `Episode ${f.episode_id} : ${f.title}`):"This planet does not appeat in any film"
-            let set = new Set(formatFilms)
-            let formFilms = Array.from(set) 
+            if(planetFilms!== null){
+                let films = await filmModel.find({ url: { $in: planetFilms } })
+                let formatFilms = films[0]?films.map(f => `Episode ${f.episode_id} : ${f.title}`):"This planet does not appeat in any film"
+                let set = new Set(formatFilms)
+                 formFilms = Array.from(set) 
+            }else{
+                 formFilms = null   
+            }
 
             let planetResidents = modifiedPlanet.residents
             let residents = await peopleModel.find({ url: { $in: planetResidents } })
@@ -65,7 +69,7 @@ const getPlanetById = async (req, res) => {
             let formattedPlanet = {
                 _id: findPlanet._id,
                 name: findPlanet.name,
-                diameter:"4200",
+                diameter: findPlanet.diameter,
                 climate: findPlanet.climate,
                 terrain: findPlanet.terrain,
                 surface_water: findPlanet.surface,

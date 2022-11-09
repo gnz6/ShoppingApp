@@ -5,7 +5,7 @@ const getMovies = async (req, res) => {
 
     const api = await filmModel.find()
 
-    if (!filmModel[0]) {
+    if (!api.length) {
 
         const link = "https://swapi.dev/api/films/?format=json"
         const movies = axios.get(link).then(resp => resp.data.results)
