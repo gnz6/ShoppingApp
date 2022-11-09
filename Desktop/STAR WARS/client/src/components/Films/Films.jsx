@@ -19,7 +19,7 @@ function Films() {
     const moviesInPage =()=>{
         if(search.length === 0) return allFilms.slice(currentPage ,currentPage + 8)
         
-        const filteredChars = allFilms.filter(film=> film.name.toLowerCase().includes(search.toLowerCase())) 
+        const filteredChars = allFilms.filter(film=> film.title.toLowerCase().includes(search.toLowerCase())) 
         return filteredChars.slice(currentPage, currentPage+8)
     }
     

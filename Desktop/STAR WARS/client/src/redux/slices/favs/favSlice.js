@@ -3,18 +3,18 @@ import {createSlice} from "@reduxjs/toolkit"
 export const favSlice = createSlice({
     name:"fav",
     initialState:{
-        favs:[],
+        favs:{},
     },
     reducers:{
-        addFav:(state,action)=>{
+        responseFav:(state,action)=>{
             state.favs = action.payload
         },
-        removeFav:(state, action)=>{
+        responseDeleteFav:(state,action)=>{
             state.favs = action.payload
         }
 }
 })
 
-export const {addFav, removeFav}= favSlice.actions;
+export const {responseFav, responseDeleteFav}= favSlice.actions;
 
 export default favSlice.reducer

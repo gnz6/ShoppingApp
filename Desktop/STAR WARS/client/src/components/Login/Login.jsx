@@ -39,8 +39,8 @@ const Login = () => {
     const userMail = userObject.email
     const name = userObject.given_name
     dispatch(googleLogin(userMail, name))
-    window.location.assign("http://localhost:3000/home")
     navigate("/home")
+    window.location.assign("http://localhost:3000/home")
   }
 
   useEffect(() => {

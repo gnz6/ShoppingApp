@@ -1,20 +1,20 @@
-import { addFav , removeFav } from "./speciesSlice";
+import { responseFav, responseDeleteFav } from "./favSlice";
 import axios from "axios";
 
-export const addFavs = (id,userId) => {
+export const addFavs = (id, user_id) => {
   return (dispatch) => {
     axios
-      .put(`http://localhost:3001/api/favs/${id}`, userId)
-      .then((info) => dispatch(addFav(info.data)))
+      .put(`http://localhost:3001/api/favs/${id}`, { user_id: user_id })
+      .then((info) => dispatch(responseFav(info.data)))
       .catch((err) => console.log(err));
   };
 };
 
-export const removeFavs = (id, userId) => {
-    return (dispatch) => {
-        axios
-          .delete(`http://localhost:3001/api/favs/${id}`, userId)
-          .then((info) => dispatch(removeFav(info.data)))
-          .catch((err) => console.log(err));
-      };
-    };
+export const removeFavs = (id, user_id) => {
+  return (dispatch) => {
+    axios
+      .delete(`http://localhost:3001/api/favs/${id}`, { user_id: user_id })
+      .then((info) => dispatch(responseDeleteFav(info.data)))
+      .catch((err) => console.log(err));
+  };
+};

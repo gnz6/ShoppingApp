@@ -18,6 +18,9 @@ export const authSlice = createSlice({
         googleLog:(state, action)=>{
             state.user = action.payload
         },
+        getUser:(state, action)=>{
+            state.user = action.payload
+        }
     //     clearLogin:(state,{payload})=>{
     //         state.user = payload
     //     },
@@ -30,6 +33,6 @@ export const authSlice = createSlice({
 }
 })
 
-export const {login,logout, register, googleLog}= authSlice.actions;
+export const {login,logout, register, googleLog, getUser}= authSlice.actions;
 
 export default authSlice.reducer
