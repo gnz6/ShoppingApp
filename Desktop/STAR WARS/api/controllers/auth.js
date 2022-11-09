@@ -53,10 +53,10 @@ const googleLogin = async(req, res)=>{
             const newUser = {
                 name, email
             }
-            await usersModel.create(newUser)
+            const findUser = await usersModel.create(newUser)
             const token = sign({ id: newUser._id}, `${SECRET}`, {expiresIn:86400})
             // return res.status(200).send({token, addUser})
-            return res.send(`${newUser.email} registered.`)
+            return res.send({token, findUser})
 
         }else{
             const token = sign({ id: findUser._id}, `${SECRET}`, {expiresIn:86400})
