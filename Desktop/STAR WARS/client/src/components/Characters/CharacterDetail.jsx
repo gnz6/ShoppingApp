@@ -41,6 +41,8 @@ const CharacterDetail = () => {
         // window.location.reload()
     }
 
+    console.log(user);
+
 
     return (
     <div class="text-white w-full items-center justify-center h-screen bg-black bg-opacity-60 p-10">

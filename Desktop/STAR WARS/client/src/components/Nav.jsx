@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import logo from "../assets/Star_Wars_Logo..png"
@@ -21,6 +21,8 @@ const handleLogout=(e)=>{
   window.location.reload()
 }
 
+useEffect(() => {
+}, [dispatch, auth]);
 
   return (
     <nav class=" border-gray-200 px-2 sm:px-4 py-2.5 rounded bg-black bg-opacity-90 w-screen flex justify-evenly">

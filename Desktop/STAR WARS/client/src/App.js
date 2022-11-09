@@ -18,7 +18,6 @@ import { getUserByEmail } from "./redux/slices/auth/authActions";
 
 
 function App() {
-  const dispatch = useDispatch()
   const auth = JSON.parse(localStorage.getItem("token"))
   if (auth) {
     axios.defaults.headers.common['x-access-token'] = auth.token;
@@ -26,11 +25,14 @@ function App() {
 } else {
     axios.defaults.headers.common['x-access-token'] = null;
 }
+const dispatch = useDispatch()
+const user = useSelector(state=>state.auth.user)
 
 useEffect(()=>{
-      dispatch(getUserByEmail(auth.findUser._id))
-},[dispatch, auth.findUser._id])
-const user = useSelector(state=> state.auth.user)
+  if(auth){
+    dispatch(getUserByEmail(auth.findUser._id))
+  }
+},[dispatch])
 
   return (
     <BrowserRouter>

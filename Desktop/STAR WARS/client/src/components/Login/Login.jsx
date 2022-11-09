@@ -5,6 +5,7 @@ import { logUser, googleLogin } from '../../redux/slices/auth/authActions'
 import jwt_decode from "jwt-decode";
 import { NavLink, useNavigate } from 'react-router-dom';
 import sabers from "../../assets/sabers.png"
+import { getUserByEmail } from '../../redux/slices/auth/authActions';
 
 const Login = () => {
 
@@ -12,11 +13,9 @@ const Login = () => {
   const google = window.google
   const [googleUser, setGoogleUser] = useLocalStorage("googleUser")
   const dispatch = useDispatch()
-  // const [errors, setErrors] = useState({ initial: "" })
-  // const { user } = useSelector(state => state.auth)
-  // let token = false;
-   const navigate = useNavigate()
-
+  const navigate = useNavigate()
+  const auth = JSON.parse(localStorage.getItem("token"))
+  // const [auth, setAuth ] = useLocalStorage("token")
   const handleInputChange = (e) => {
     setInput({
       ...input,
@@ -26,10 +25,8 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hola")
     dispatch(logUser(input.email, input.password))
     window.location.assign("http://localhost:3000/home")
-    // navigate("/home")
 
   }
 
@@ -38,9 +35,10 @@ const Login = () => {
     setGoogleUser(userObject)
     const userMail = userObject.email
     const name = userObject.given_name
-    dispatch(googleLogin(userMail, name))
-    navigate("/home")
-    window.location.assign("http://localhost:3000/home")
+     dispatch(googleLogin(userMail, name))
+     navigate("/home")
+     alert("Logged in, welcome!")
+     window.location.assign("http://localhost:3000/home")
   }
 
   useEffect(() => {
@@ -54,6 +52,16 @@ const Login = () => {
       { theme: "outline", size: "medium" }
     )
   }, [googleUser])
+
+  
+useEffect(()=>{
+  if(auth){
+    dispatch(getUserByEmail(auth.findUser._id))
+
+  }
+},[dispatch])
+const user = useSelector(state=> state.auth.user)
+
 
 
 

@@ -11,9 +11,12 @@ export const addFavs = (id, user_id) => {
 };
 
 export const removeFavs = (id, user_id) => {
+  // console.log("id", id);
+  // console.log("user_id", user_id);
   return (dispatch) => {
     axios
-      .delete(`http://localhost:3001/api/favs/${id}`, { user_id: user_id })
+      .delete(`http://localhost:3001/api/favs/${id}`, {user_id:user_id})
+      // .then((info) => console.log(info))
       .then((info) => dispatch(responseDeleteFav(info.data)))
       .catch((err) => console.log(err));
   };
