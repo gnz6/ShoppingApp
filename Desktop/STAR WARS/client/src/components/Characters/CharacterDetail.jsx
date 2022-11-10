@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { getUserByEmail } from '../../redux/slices/auth/authActions'
 import { getCharacter } from '../../redux/slices/characters/characterActions'
 import { addFavs, removeFavs } from '../../redux/slices/favs/favActions'
 import Loader from '../Loader'
@@ -14,7 +15,7 @@ const CharacterDetail = () => {
  
     useEffect(()=>{
         dispatch(getCharacter(id))
-
+        dispatch(getUserByEmail(user._id))
     },[dispatch, id])
   
     const character = useSelector(state=>state.character.character)
@@ -31,17 +32,24 @@ const CharacterDetail = () => {
         window.location.reload()
     }
 
+    // const handleRemoveFav = (e)=>{
+    //     e.preventDefault();
+    //     const user_id = user._id
+ 
+    //     dispatch(removeFavs( id, user_id))
+     
+    // }
+
     const handleRemoveFav = (e)=>{
         e.preventDefault();
         const user_id = user._id
-        console.log("user",user_id);
-        console.log("id",id);
-        dispatch(removeFavs(id, user_id))
-        // alert(`${character.name} removed from favs`)
-        // window.location.reload()
-    }
+        if(user_id && id){
+          dispatch(removeFavs(id, user_id))
+          window.location.reload()
+        }
+      }
 
-    console.log(user);
+    // console.log(user);
 
 
     return (

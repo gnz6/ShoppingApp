@@ -16,7 +16,7 @@ const FavCharacters = () => {
     navigate("/home")
   }
 
-    const [charId , setCharId] = useState("")
+    const [id , setCharId] = useState("")
 
     useEffect(()=>{
       dispatch(getAllCharacters())
@@ -33,9 +33,11 @@ const FavCharacters = () => {
       e.preventDefault();
       setCharId(e.target.value)
       const user_id = user._id
-      console.log(charId);
-      dispatch(removeFavs(charId, user_id))
-  }
+      if(user_id && id){
+        dispatch(removeFavs(id, user_id))
+        window.location.reload()
+      }
+    }
 
     return (
     <div class="bg-black bg-opacity-60 h-screen">

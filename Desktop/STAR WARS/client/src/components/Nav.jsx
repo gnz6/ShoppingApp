@@ -18,7 +18,8 @@ const handleLogout=(e)=>{
   e.preventDefault()
   setGoogleUser(null)
   dispatch(logOutUser())
-  window.location.reload()
+
+  window.location.assign("http://localhost:3000/home")
 }
 
 useEffect(() => {
