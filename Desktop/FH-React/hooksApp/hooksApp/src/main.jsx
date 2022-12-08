@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Padre } from './07-tarea-memo/07-tarea-memo/Padre'
+import TodoApp from './08-useReducer/TodoApp'
+// import { Padre } from './07-tarea-memo/07-tarea-memo/Padre'
 // import MemoHook from './06-useMemo/MemoHook'
 // import CallbackHook from './07-useCallback/CallbackHook'
 // import CounterApp from './01-useState/CounterApp'
@@ -13,9 +14,11 @@ import { Padre } from './07-tarea-memo/07-tarea-memo/Padre'
 // import Memorize from './06-useMemo/Memorize'
 // import HooksApp from './HooksApp'
 import './index.css'
+// import "./08-useReducer/intro-reducer"
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Padre/>
+    <TodoApp/>
   </React.StrictMode>
 )
