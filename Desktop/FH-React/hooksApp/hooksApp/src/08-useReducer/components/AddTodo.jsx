@@ -21,9 +21,9 @@ const AddTodo = ({onNewTodo}) => {
     }
 
   return (
-    <form onSubmit={handleAddTodo}>
+    <form onSubmit={handleAddTodo} className="">
         <input value={description} name={"description"} onChange={handleInputChange} className='form-control' placeholder='Add Todo' type={"text"}/>
-        <button type='submit' className='btn btn-primary'> Add Todo </button>
+        <button type='submit' className='btn btn-primary my-2'> Add Todo </button>
     </form>
   )
 }

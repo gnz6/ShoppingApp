@@ -6,9 +6,9 @@ const TodoList = ({ todos, completeTodo, handleDeleteTodo }) => {
 
 
     return (
-        <ul>
+        <ul className='list-group d-flex justify-content-between'>
             {todos.map((todo) => (
-                <TodoItem
+                <TodoItem 
                     key={todo.id}
                     id={todo.id}
                     description={todo.description}
