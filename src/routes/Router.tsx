@@ -6,13 +6,13 @@ import {
   Navigate,
 } from "react-router-dom";
 import { routes } from "./routes";
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 
 const lazyRoutes = routes
 
 export const Router = () => {
 
-  useEffect(()=>{}, [lazyRoutes])
+  // useEffect(()=>{}, [lazyRoutes])
   return (
     <Suspense fallback={<h1>Loading..</h1>}>
       <BrowserRouter>
