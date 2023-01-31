@@ -6,9 +6,13 @@ import {
   Navigate,
 } from "react-router-dom";
 import { routes } from "./routes";
-import { Suspense } from "react";
+import { Suspense, useEffect } from 'react';
+
+const lazyRoutes = routes
 
 export const Router = () => {
+
+  useEffect(()=>{}, [lazyRoutes])
   return (
     <Suspense fallback={<h1>Loading..</h1>}>
       <BrowserRouter>
@@ -17,27 +21,30 @@ export const Router = () => {
             <h1>ReactRouter</h1>
 
             <ul>
-              {routes.map((route) => (
-                <li key={route.path}>
+              {lazyRoutes.map(({to, name}) => (
+                <li key={to}>
                   <NavLink
-                    to={route.to}
+                    to={to}
                     className={({ isActive }) => (isActive ? "nav-active" : "")}
                   >
-                    {route.name}
+                    {name}
                   </NavLink>
                 </li>
               ))}
             </ul>
           </nav>
+          
           <Routes>
-            {routes.map((route) => (
+
+            {
+            lazyRoutes.map(({path , Component}) => (
               <Route
-                key={route.to}
-                path={route.path}
-                element={<route.Component />}
+                key={path}
+                path={path}
+                element={<Component />}
               />
             ))}
-            <Route path="/*" element={<Navigate to={routes[0].to} replace />} />
+            <Route path="/*" element={<Navigate to={routes[0].to}  />} />
           </Routes>
         </div>
       </BrowserRouter>
