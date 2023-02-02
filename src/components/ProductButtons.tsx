@@ -1,6 +1,7 @@
 import { ProductContext } from "./ProductCard";
 import styles from "../styles/styles.module.css"
 import { CSSProperties, useContext } from "react";
+import { useProduct } from '../hooks/useProduct';
 
 export interface Props{
   className?:string,

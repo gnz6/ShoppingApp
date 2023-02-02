@@ -4,13 +4,11 @@ import ProductCard, {
   ProductTitle,
 } from "../components/index";
 import "../styles/custom-styles.css";
+import { useShopping } from "../hooks/useShopping";
+import { products } from "../data/products";
 
 export const ShoppingPage = () => {
-  const product = {
-    id: "1",
-    title: "Coffee Mug",
-    img: "./coffee-mug.png",
-  };
+  const { onProductCountChange, shoppingCart } = useShopping();
 
   return (
     <div>
@@ -24,25 +22,38 @@ export const ShoppingPage = () => {
           flexWrap: "wrap",
         }}
       >
-        <ProductCard product={product} className="bg-dark">
-          <ProductCard.Image className="custom-image" />
-          <ProductCard.Title title="" className="text-white" />
-          <ProductCard.Buttons className="custom-buttons" />
-        </ProductCard>
+        {products.map((product) => (
+          <ProductCard
+            product={product}
+            className="bg-dark"
+            key={product.id}
+            onChange={onProductCountChange}
+            value={shoppingCart[product.id]?.count || 0}
+          >
+            <ProductImage className="custom-image" />
+            <ProductTitle title="" className="text-white" />
+            <ProductButtons className="custom-buttons" />
+          </ProductCard>
+        ))}
+      </div>
 
-        <ProductCard product={product} className="bg-dark">
-          <ProductImage className="custom-image" />
-          <ProductTitle title="" className="text-white" />
-          <ProductButtons className="custom-buttons" />
-        </ProductCard>
-
-        <ProductCard product={product} className="" style={{
-          backgroundColor: "#70D1F8"
-        }}>
-          <ProductImage  />
-          <ProductTitle title=""  />
-          <ProductButtons />
-        </ProductCard>
+      <div className="shopping-cart">
+        {Object.entries(shoppingCart).map(([key, product]) => (
+          <ProductCard
+            key={key}
+            product={product}
+            className="bg-dark"
+            style={{ width: "100px" }}
+            value={product.count}
+            onChange={onProductCountChange}
+          >
+            <ProductImage
+              className="custom-image"
+              style={{ boxShadow: "10px 10px 10px " }}
+            />
+            <ProductButtons className="custom-buttons" />
+          </ProductCard>
+        ))}
       </div>
     </div>
   );
