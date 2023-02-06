@@ -3,7 +3,6 @@ import ProductCard, {
   ProductImage,
   ProductTitle,
 } from "../components/index";
-import "../styles/custom-styles.css";
 
 import { products } from "../data/products";
 
@@ -17,19 +16,14 @@ export const ShoppingPage = () => {
 
       <ProductCard
         product={product}
-        className="bg-dark"
         key={product.id}
         initialValues={{ count: 4, maxCount: 12 }}
       >
         {({reset, increaseBy, count, isMaxReached, maxCount}) => (
           <>
-            <ProductImage className="custom-image" />
-            <ProductTitle title="" className="text-white" />
-            <ProductButtons className="custom-buttons" />
-
-            <button onClick={()=>increaseBy(-2)}>-2</button>
-            <button onClick={reset}>Reset</button>
-            { !isMaxReached?  <button onClick={()=>increaseBy(2)}>+2</button>: null  }
+            <ProductImage  />
+            <ProductTitle title=""  />
+            <ProductButtons  />
           </>
         )}
       </ProductCard>
