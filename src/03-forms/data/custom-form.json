@@ -1,0 +1,98 @@
+[
+  {
+    "type": "input",
+    "name": "firstName",
+    "placeholder": "Gonzalo",
+    "label": "First Name",
+    "value": "",
+    "validations":[
+        {
+            "type":"required"
+        },
+        {
+            "type":"minLength",
+            "value": 2
+        }
+    ]
+  },
+  {
+    "type": "input",
+    "name": "lastName",
+    "placeholder": "Pirovano",
+    "label": "Last Name",
+    "value": "",
+    "validations":[
+        {
+            "type":"required"
+        }
+        ,
+        {
+            "type":"minLength",
+            "value": 2
+        }
+    ]
+  },
+  {
+    "type": "email",
+    "name": "email",
+    "placeholder": "example@email.com",
+    "label": "Email",
+    "value": "",
+    "validations":[
+        {
+            "type":"required"
+        },
+        {
+            "type":"email"
+        }
+    ]
+  },
+  {
+    "type": "password",
+    "name": "password",
+    "placeholder": "********",
+    "label": "Password",
+    "value": "",
+    "validations":[
+        {
+            "type":"required"
+        },
+        {
+            "type":"minLength",
+            "value": 5
+        }
+    ]
+  },
+  {
+    "type": "password",
+    "name": "password2",
+    "placeholder": "*******",
+    "label": "Confirm Password",
+    "value": "",
+    "validations":[
+        {
+            "type":"required"
+        },
+        {
+            "type":"minLength",
+            "value": 5
+        },
+        {
+            "type":"password2"
+        }
+    ]
+  },
+  {
+    "type": "select",
+    "name": "jobType",
+    "label": "Job Type",
+    "value": "",
+    "options": [{"name": "Backend", "id": 1}, {"name": "Frontend", "id": 2}, {"name": "Fullstack", "id": 3}],
+    "validations":[
+        {
+            "type":"required"
+        }
+    ]
+  }
+
+]

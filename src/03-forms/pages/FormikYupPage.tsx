@@ -1,6 +1,7 @@
 import {  useFormik } from "formik";
 import * as Yup from "yup"
 import "../styles/styles.css";
+import { validation } from "./ValidationYup";
 
 
 export const FormikYupPage = () => {
@@ -11,11 +12,7 @@ export const FormikYupPage = () => {
     onSubmit: (formData) => {
       console.log(formData);
     },
-    validationSchema : Yup.object({
-      firstname: Yup.string().max(15, "Must be 15 chars long or shorter").required("Required"),
-      lastname: Yup.string().max(15, "Must be 15 chars long or shorter").required("Required"),
-      email: Yup.string().email("Invalid Email").required("Required"),
-    })
+    validationSchema : validation
   });
 
   const {  handleSubmit, errors, touched , getFieldProps } = formik;
